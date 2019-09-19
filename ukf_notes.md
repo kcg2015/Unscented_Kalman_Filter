@@ -1,7 +1,15 @@
 
+![img](figs/ukf_tracking.gif)
+
+
+
+
 ### Notes:
 
 The unscented transform takes points sampled from some arbitary probability distribution, passes them through an arbitrary, nonlinear function and produces a Gaussian for each transformed points. 
+
+
+
 
 #### Sigma Points Augmentation
 
