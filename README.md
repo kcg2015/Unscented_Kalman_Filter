@@ -5,7 +5,7 @@ Unscented Kalman filtering in Python and C++ for tracking and localization
 ![img](figs/tracking_a_100.gif)
 ## Introduction
 
-This implemented an unscented Kalman filter (UKF) in python, to be further used for tracking related projects. I take inspiration from the repos such as:
+This repo implements an unscented Kalman filter (UKF) class in python, to be further used for tracking and localization related projects. I take inspiration from the repos such as:
 
 * https://github.com/rlabbe/filterpy 
 * https://github.com/AtsushiSakai/PythonRobotics/tree/master/Localization. 
