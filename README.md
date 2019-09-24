@@ -19,6 +19,12 @@ Specifically, my goals are:
 
 
 
+Specifically, my goals are:
+
+* The UKF class should be self-contained -- i.e. it should include all the function blocks within a single class, including the Sigma points.
+* The UKF class should have the flexibility of taking any forms of process and measurement functions. 
+* The UKF class should be able to deal with both additive and non-additive process noise. The UKF class should have the capability of implementing Sigma points augmentation. This capability, in my opinion, is not adequately addressed in the two repos mentioned above.
+
 ### Key Files
 
 * `ukf.py` -- implements the unscented Kalman filter class
@@ -126,6 +132,12 @@ The process noise matrix Q_a is given by
 
 ![img](figs/Qa.gif)
 
+This line implements the above operations:
+
+```
+P = block_diag(self.P, self.Qa)
+```
+
 #### Prediction
 
 The formula of the prediction stage is given by:
@@ -178,3 +190,56 @@ The prediction stage is implemented in `prediction ()`, which calls `calculate_m
 ```
 
 #### Update
+
+The update stage is implemented in `update()`, which calls `compute_measurement_sigma_pts()`.
+
+![img](figs/update.gif)
+
+```
+def update(self, z, **hx_args):
+        
+        """
+        Update step, calculate the (new) posterior state and covariance
+        Input:
+             z: measuremnt
+             **hx_args: keywords/arguments associated with measurement function defined in hx
+        """
+        
+        hx = self.hx
+        sigmas_f = self.sigma_pts_f
+        n_sigmas = sigmas_f.shape[0]
+        # Transform sigma points from state space to measurement space
+        sigmas_h = self.compute_measurement_sigma_pts(sigmas_f, **hx_args) 
+        self.sigma_pts_h = sigmas_h
+        
+        if not self.z_resid:
+            zp, Pz = self.calculate_mean_covariance(sigmas_h, self.R)
+        else:
+            zp, Pz = self.calculate_mean_covariance(sigmas_h, self.R, adjust = True, 
+                                                    indices = self.z_resid_indices)
+        self.S = Pz
+        
+        # Compute cross variance of the state and the measurement
+        Pxz = np.zeros((self.dim_x, self.dim_z))
+        for i in range(n_sigmas):
+            x_r = sigmas_f[i] - self.x
+            if self.x_resid:
+                x_r = self.residual(x_r, self.x_resid_indices)
+            z_r = sigmas_h[i] - zp
+            if self.z_resid:
+                z_r = self.residual(z_r, self.z_resid_indices)
+            Pxz += self.Wc[i] * outer(x_r, z_r)
+        self.SI = inv(Pz)
+        
+        K = dot(Pxz, inv(Pz)) # Kalman gain
+        self.K = K
+        
+        # New state estimae and covariance maxtrix
+        self.y = z - zp
+        self.x = self.x + dot(K, z - zp)
+        self.P = self.P - dot(K, Pz).dot(K.T)
+        self.x_post = self.x.copy()
+        self.P_post = self.P.copy()
+        
+        self.z = deepcopy(z)
+```
