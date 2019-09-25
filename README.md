@@ -5,37 +5,29 @@ Unscented Kalman filtering in Python and C++ for tracking and localization
 ![img](figs/tracking_a_100.gif)
 ## Introduction
 
-This repo implements an unscented Kalman filter (UKF) class in python, to be further used for tracking and localization related projects. I take inspiration from the repos such as:
+This repo implements an unscented Kalman filter (UKF) class in python, to be further used for tracking and localization related projects. I take inspiration from  and informed by the repos such as:
 
 * https://github.com/rlabbe/filterpy 
 * https://github.com/AtsushiSakai/PythonRobotics/tree/master/Localization. 
 
-Specifically, my goals are:
+The requirement for the UKF class are:
 
-* The UKF class should be self-contained -- i.e. it should include all the function blocks within a single class, including the Sigma points.
-* The UKF class should have the flexibility of taking any forms of process and measurement functions. 
-* The UKF class should be able to deal with both additive and non-additive process noise. The UKF class should have the capability of implementing Sigma points augmentation. This capability, in my opinion, is not adequately addressed in the two repos mentioned above.
+* The UKF class should be self-contained -- i.e. it should include all the function blocks within a single class, including the Sigma point generation and update.
+* The UKF class should have the flexibility of taking any forms of process and measurement functions as input.
+* The UKF class should be able to deal with both additive and non-additive process noise. In particular, the UKF class should have the capability of implementing Sigma points augmentation as often required for non-additive process noise. This capability, in my opinion, is not adequately addressed in the two repos mentioned above.
 
-
-
-
-Specifically, my goals are:
-
-* The UKF class should be self-contained -- i.e. it should include all the function blocks within a single class, including the Sigma points.
-* The UKF class should have the flexibility of taking any forms of process and measurement functions. 
-* The UKF class should be able to deal with both additive and non-additive process noise. The UKF class should have the capability of implementing Sigma points augmentation. This capability, in my opinion, is not adequately addressed in the two repos mentioned above.
 
 ### Key Files
 
-* `ukf.py` -- implements the unscented Kalman filter class
-* `process_measurement.py` -- implements a few  process and measurement model. This script will be regularly updated.
+* `ukf.py` -- implements the UKF class
+* `process_measurement.py` -- implements a few  process and measurement modeld. This script will be regularly updated.
 * `ukf_ctrv_test.ipynb` -- an Ipython notebook that illustrates the tracking of highway vehicle using UKF and constant turn rate and velocity (CTRV) model.
 
 ## Implementation Notes
 
 #### Sigma Points Augmentation
 
-The possible confusion and difficulty in implementing UKF lies in Sigma points augmentation. The augmentation is needed when the process noise is non-additive. The following table summarizes the comparison of the dimension of sigma points used in state, process, and measurement, respectively. Note that n and n_\a represent the dimension of the (regular) state and augmented state, respectively.
+The possible confusion and difficulty in implementing UKF lies in Sigma points augmentation. The augmentation is often needed when the process noise is non-additive. The following table summarizes the comparison of the dimension of sigma points used in state, process, and measurement, respectively. Note that n and n_\a represent the dimension of the (regular) state and augmented state, respectively.
 
 |            | Sigma Points   |Augmented Sigma points |
 |---         |---                  |---              |
