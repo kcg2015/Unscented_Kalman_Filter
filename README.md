@@ -10,7 +10,7 @@ This repo implements an unscented Kalman filter (UKF) class in python, to be fur
 * https://github.com/rlabbe/filterpy 
 * https://github.com/AtsushiSakai/PythonRobotics/tree/master/Localization. 
 
-The requirement for the UKF class are:
+The requirements for the UKF class are:
 
 * The UKF class should be self-contained -- i.e. it should include all the function blocks within a single class, including the Sigma point generation and update.
 * The UKF class should have the flexibility of taking any forms of process and measurement functions as input.
