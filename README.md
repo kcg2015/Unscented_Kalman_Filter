@@ -27,7 +27,7 @@ The requirements for the UKF class are:
 
 #### Sigma Points Augmentation
 
-The possible confusion and difficulty in implementing UKF lies in Sigma points augmentation. The augmentation is often needed when the process noise is non-additive. The following table summarizes the comparison of the dimension of sigma points used in state, process, and measurement, respectively. Note that n and n_\a represent the dimension of the (regular) state and augmented state, respectively.
+The possible confusions and difficulties in implementing UKF  could happen in Sigma points augmentation. The augmentation is often needed when the process noise is non-additive. To avoid possible confusions,  I summarize in the following table  the dimension of Sigma points and augmented Sigma points used in state, process, and measurement, respectively. Note that n and n_\a represent the dimension of the (regular) state and augmented state, respectively.
 
 |            | Sigma Points   |Augmented Sigma points |
 |---         |---                  |---              |
