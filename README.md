@@ -136,6 +136,7 @@ The formula of the prediction stage is given by:
 
 ![img](figs/prediction.gif)
 
+Note that for non-additive noise, the process noise covariance matrix Q, by default, is set to zero.
 The computation of process Sigma points is implemented in `compute_process_sigma_pts ()`:
 
 ```
