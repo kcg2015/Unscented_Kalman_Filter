@@ -5,7 +5,7 @@ Unscented Kalman filtering in Python and C++ for tracking and localization
 ![img](figs/tracking_a_100.gif)
 ## Introduction
 
-This repo implements an unscented Kalman filter (UKF) class in python, to be further used for tracking and localization related projects. I take inspiration from  and am informed by the repos such as:
+This repo implements an unscented Kalman filter (UKF) class in python, to be further integrated into tracking and localization related projects. I take inspiration from  and am informed by the repos such as:
 
 * https://github.com/rlabbe/filterpy 
 * https://github.com/AtsushiSakai/PythonRobotics/tree/master/Localization. 
@@ -14,7 +14,7 @@ The requirements for the UKF class are:
 
 * The UKF class should be self-contained -- i.e. it should include all the function blocks within a single class, including the Sigma point generation and update.
 * The UKF class should have the flexibility of taking any forms of process and measurement functions as input.
-* The UKF class should be able to deal with both additive and non-additive process noise. In particular, the UKF class should have the capability of implementing Sigma points augmentation as often required for non-additive process noise. This capability, in my opinion, is not adequately addressed in the two repos mentioned above.
+* The UKF class should be able to deal with both additive and non-additive process noise. In particular, the UKF class should have the capability of implementing Sigma points augmentation as often required for non-additive process noise. This capability, to the best of my knowledge, is not adequately addressed in the two repos mentioned above.
 
 
 ### Key Files
