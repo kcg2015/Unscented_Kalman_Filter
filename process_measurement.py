@@ -1,9 +1,9 @@
 import numpy as np
 from math import sqrt, fabs, sin, cos, atan2
 
-
-
-
+"""
+This script provides various process (motion) and measurement models to be used by a UKF 
+"""
 
 def ctrv(input_state, dt):
     """
@@ -102,7 +102,7 @@ def radar(input_state):
     
     if fabs(c) < 0.0001: # warning for divsion by zero
         print("Error -Division by Zero")
-        c=0.0001;
+        c = 0.0001;
     
     rho = c;
     phi = atan2(p_y, p_x);
