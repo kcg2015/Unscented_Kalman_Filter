@@ -27,7 +27,8 @@ def ctrv(input_state, dt):
     yaw_p = yaw + yawd*dt
     yawd_p = yawd
     
-    if len(input_state) == 7: # When the effect of nu_a, and nu_yawdd need to be considered
+    if len(input_state) == 7: # When the effect of nu_a, and nu_yawdd need to be considered, i.e, for 
+                              # non-additive noise, the state needs to be augmented.
         nu_a = input_state[5]
         nu_yawdd = input_state[6]
         
